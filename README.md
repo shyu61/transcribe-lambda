@@ -1,7 +1,7 @@
 # transcribe_lambda
 
 ## Usage
-1. Upload `index.zip`
+1. Upload `index.zip` to lambda.
 
 ## Customize
 1. Edit `index.js`
