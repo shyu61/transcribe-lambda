@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
   const fileType = key.split('.')[1];
   const jobName = context.awsRequestId;
 
-  const paramsForTranscribe = {
+  const params = {
     LanguageCode: 'ja-JP',
     Media: {
       MediaFileUri: filePath,
@@ -19,15 +19,14 @@ exports.handler = async (event, context) => {
     TranscriptionJobName: jobName,
     MediaFormat: fileType,
     OutputBucketName: bucket,
-    OutputKey: filePath.replace(/input/g, 'output'),
+    OutputKey: key.replace(/input/, 'output').replace(/\.[^/.]+$/, '.txt'),
   }
 
-  console.log("========== Transcribe Start ==========");
+  console.log('Transcribe start');
   try {
-    const response = await transcribeService.startTranscriptionJob(paramsForTranscribe).promise();
+    const response = await transcribeService.startTranscriptionJob(params).promise();
     console.log(response);
-    console.log("========== Transcribe Finished ==========");
-    // const status = response.TranscriptionJob.TranscriptionJobStatus;
+    console.log('Transcribe finished');
   } catch (err) {
     console.log(err);
     const message = `Error getting object ${key} from bucket ${bucket}.`;
