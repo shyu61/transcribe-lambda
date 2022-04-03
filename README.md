@@ -1,4 +1,4 @@
-# transcribe_lambda
+# transcribe-lambda
 
 ## Usage
 1. Upload `index.zip` to lambda.
